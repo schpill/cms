@@ -52,6 +52,7 @@
             $ini->populate($iniData);
             container()->setConfig($ini);
             container()->setServerDir(repl(DS . 'application', '', APPLICATION_PATH));
+            container()->setIsAdmin(strstr($_SERVER['REQUEST_URI'], '/backadmin') ? true : false);
         }
 
         private static function loadDatas()
@@ -78,13 +79,22 @@
 
         private static function dispatch()
         {
-            Router::dispatch();
-            Router::language();
+            if (true === container()->getIsAdmin()) {
+                Router::dispatch();
+                Router::language();
+            } else {
+                Cms::dispatch();
+                Cms::language();
+            }
         }
 
         private static function run()
         {
-            Router::run();
+            if (true === container()->getIsAdmin()) {
+                Router::run();
+            } else {
+                Cms::run();
+            }
         }
 
         private static function test()

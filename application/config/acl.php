@@ -2,14 +2,14 @@
     $acl = array();
 
     $user = new ACL;
-    $user->setPassword('181dba7d095fd5540289f3cbba3b20bf');
-    $user->setEmail('me@geraldplusquellec.me');
-    $user->setLogin('gplusquellec');
-    $user->setFirstname('Gerald');
-    $user->setLastname('Plusquellec');
+    $user->setPassword('21232f297a57a5a743894a0e4a801fc3');
+    $user->setEmail('user@domain.com');
+    $user->setLogin('admin');
+    $user->setFirstname('firstname');
+    $user->setLastname('lastname');
     $user->setRights(
         array(
-            'youtube' => array(
+            'option'            => array(
                 'list'          => true,
                 'add'           => true,
                 'duplicate'     => true,
@@ -21,7 +21,7 @@
                 'search'        => true,
                 'empty_cache'   => true,
             ),
-            'produit' => array(
+            'object'            => array(
                 'list'          => true,
                 'add'           => true,
                 'duplicate'     => true,
@@ -33,7 +33,7 @@
                 'search'        => true,
                 'empty_cache'   => true,
             ),
-            'collection' => array(
+            'collection'        => array(
                 'list'          => true,
                 'add'           => true,
                 'duplicate'     => true,
@@ -45,7 +45,7 @@
                 'search'        => true,
                 'empty_cache'   => true,
             ),
-            'categorie' => array(
+            'page'              => array(
                 'list'          => true,
                 'add'           => true,
                 'duplicate'     => true,
@@ -57,7 +57,67 @@
                 'search'        => true,
                 'empty_cache'   => true,
             ),
-            'etat' => array(
+            'language'          => array(
+                'list'          => true,
+                'add'           => true,
+                'duplicate'     => true,
+                'view'          => true,
+                'edit'          => true,
+                'delete'        => true,
+                'import'        => true,
+                'export'        => true,
+                'search'        => true,
+                'empty_cache'   => true,
+            ),
+            'media'             => array(
+                'list'          => true,
+                'add'           => true,
+                'duplicate'     => true,
+                'view'          => true,
+                'edit'          => true,
+                'delete'        => true,
+                'import'        => true,
+                'export'        => true,
+                'search'        => true,
+                'empty_cache'   => true,
+            ),
+            'mediatype'         => array(
+                'list'          => true,
+                'add'           => true,
+                'duplicate'     => true,
+                'view'          => true,
+                'edit'          => true,
+                'delete'        => true,
+                'import'        => true,
+                'export'        => true,
+                'search'        => true,
+                'empty_cache'   => true,
+            ),
+            'displaymode'       => array(
+                'list'          => true,
+                'add'           => true,
+                'duplicate'     => true,
+                'view'          => true,
+                'edit'          => true,
+                'delete'        => true,
+                'import'        => true,
+                'export'        => true,
+                'search'        => true,
+                'empty_cache'   => true,
+            ),
+            'tag'               => array(
+                'list'          => true,
+                'add'           => true,
+                'duplicate'     => true,
+                'view'          => true,
+                'edit'          => true,
+                'delete'        => true,
+                'import'        => true,
+                'export'        => true,
+                'search'        => true,
+                'empty_cache'   => true,
+            ),
+            'tagpage'           => array(
                 'list'          => true,
                 'add'           => true,
                 'duplicate'     => true,

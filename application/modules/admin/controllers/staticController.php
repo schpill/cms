@@ -44,6 +44,9 @@
             if (strlen($type)) {
                 $this->view->_settings  = ake($type, Data::$_settings) ? Data::$_settings[$type] : array();
             }
+
+            $lngs = Cms::getOption('page_languages');
+            $this->view->cms_languages = !empty($lngs) ? explode(',', $lngs) : array();
         }
 
         public function preDispatch()

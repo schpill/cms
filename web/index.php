@@ -12,6 +12,7 @@
     defined('MUSIC_PATH')       || define('MUSIC_PATH',         realpath(dirname(__FILE__) . '/../storage/music'));
     defined('PHOTOS_PATH')      || define('PHOTOS_PATH',        realpath(dirname(__FILE__) . '/assets/photos'));
     defined('FILES_PATH')       || define('FILES_PATH',         realpath(dirname(__FILE__) . '/assets/files'));
+    defined('THEME_PATH')       || define('THEME_PATH',         realpath(dirname(__FILE__) . '/../themes'));
 
     // Define path to libs directory
     defined('LIBRARIES_PATH')   || define('LIBRARIES_PATH', APPLICATION_PATH . '/../src');

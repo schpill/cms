@@ -1,9 +1,9 @@
 <?php
     return array(
         'fields' => array(
-            'youtube_id'    => array('label' => 'ID Y', 'noList' => true),
-            'user'          => array('noList' => true),
-            'title'         => array()
+            'youtube_id'    => array('label'    => 'ID Y', 'noList' => true),
+            'user'          => array('label'    => 'Auteur', 'noList'   => true),
+            'title'         => array('label'    => 'Titre')
         ),
         'settings' => array(
             'singular'              => 'vidéo Youtube',

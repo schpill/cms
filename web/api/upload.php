@@ -15,8 +15,8 @@
     }
 
     $name           = UUID() . '_' . $_POST["name"];
-    defined('FILES_PATH')   || define('FILES_PATH',         realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'files'));
-    defined('CONFIG_PATH')  || define('CONFIG_PATH',        realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'config'));
+    defined('FILES_PATH')   || define('FILES_PATH',         realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'editor' . DIRECTORY_SEPARATOR . 'source'));
+    defined('CONFIG_PATH')  || define('CONFIG_PATH',        realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'Data'));
 
     $protocol = 'http';
     if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
@@ -43,7 +43,7 @@
     $type           = array_key_exists('type', $_POST)  ? $_POST['type'] : '';
     $id             = array_key_exists('id', $_POST)    ? $_POST['id']   : null;
 
-    $fileData       = CONFIG_PATH . DIRECTORY_SEPARATOR . 'datas.php';
+    $fileData       = CONFIG_PATH . DIRECTORY_SEPARATOR . strtolower($type) . '.php';
 
     $settingsUpload = array();
     $settings       = array();
@@ -64,7 +64,7 @@
         if (count($settingsUpload)) {
             settings(FILES_PATH . "/$name", $settingsUpload);
         }
-        render($urlSite . 'assets/files/' . $name);
+        render($urlSite . 'assets/editor/source/' . $name);
     }
 
     render('Problem, please reupload file!', 500);
