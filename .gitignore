@@ -31,6 +31,7 @@
 *.flat
 *.memory
 *.fake
+*.cms
 *.gpcache
 *.data
 *.ajf
