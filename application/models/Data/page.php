@@ -81,6 +81,10 @@
                     'type'          => 'manyToMany',
                     'onDelete'      => 'cascade'
                 ),
+                'translations'      => array(
+                    'type'          => 'manyToMany',
+                    'onDelete'      => 'cascade'
+                ),
             ),
             'versioning'            => true,
             'checkTuple'            => 'url',

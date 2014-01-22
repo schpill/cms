@@ -36,7 +36,6 @@
                     'onDelete'  => 'cascade'
                 ),
             ),
-            'versioning'         => true,
             'checkTuple'         => array('key', 'page'),
             'orderList'          => 'name',
             'orderListDirection' => 'ASC'

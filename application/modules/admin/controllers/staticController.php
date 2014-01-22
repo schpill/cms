@@ -4,7 +4,7 @@
     {
         public function init()
         {
-            $this->view->titleAdmin = "GP";
+            $this->view->titleAdmin = "CMS";
             $tab = explode('/', $_SERVER['REQUEST_URI']);
             $type = Arrays::last($tab);
             $action = container()->getAction();

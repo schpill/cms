@@ -5,11 +5,11 @@
             'name'              => array(
                 'label'         => 'Nom',
             ),
-            'code'             => array(
-                'label'         => 'Contenu',
-                'type'          => 'textarea',
-                'isTranslated'  => true,
+            'code'              => array(
+                'label'         => 'Code',
+                'type'          => 'code',
                 'canBeNull'     => true,
+                'notRequired'   => true,
                 'notExportable' => true,
                 'noList'        => true
             ),
@@ -17,14 +17,13 @@
         /* les parametres */
         'settings'              => array(
             /* les indexes */
-            'indexes'     => array(
-
+            'indexes'           => array(
             ),
             /* les relations */
             'relationships'     => array(
             ),
             'versioning'         => true,
-            'checkTuple'         => 'name', 'collection',
+            'checkTuple'         => 'name',
             'orderList'          => 'name',
             'orderListDirection' => 'ASC'
         ),
