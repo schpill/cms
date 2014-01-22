@@ -57,7 +57,19 @@
                 'search'        => true,
                 'empty_cache'   => true,
             ),
-            'language'          => array(
+            'translation'       => array(
+                'list'          => true,
+                'add'           => true,
+                'duplicate'     => true,
+                'view'          => true,
+                'edit'          => true,
+                'delete'        => true,
+                'import'        => true,
+                'export'        => true,
+                'search'        => true,
+                'empty_cache'   => true,
+            ),
+            'snippet'           => array(
                 'list'          => true,
                 'add'           => true,
                 'duplicate'     => true,
