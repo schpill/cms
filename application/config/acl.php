@@ -21,6 +21,18 @@
                 'search'        => true,
                 'empty_cache'   => true,
             ),
+            'partial'           => array(
+                'list'          => true,
+                'add'           => true,
+                'duplicate'     => true,
+                'view'          => true,
+                'delete'        => true,
+                'edit'          => true,
+                'import'        => true,
+                'export'        => true,
+                'search'        => true,
+                'empty_cache'   => true,
+            ),
             'object'            => array(
                 'list'          => true,
                 'add'           => true,
