@@ -76,6 +76,78 @@
                     Data::$_settings[$entity]   = $settings;
                 }
             }
+            static::fixtures();
+        }
+
+        private static function fixtures()
+        {
+            $options    = Data::getAll('option');
+            $pages      = Data::getAll('page');
+            $displays   = Data::getAll('displaymode');
+
+            if (!count($displays)) {
+                $display1 = array(
+                    'name'  => 'Online'
+                );
+                $display2 = array(
+                    'name'  => 'Offline'
+                );
+                $display3 = array(
+                    'name'  => 'Maintenance'
+                );
+                Data::add('displaymode', $display1);
+                Data::add('displaymode', $display2);
+                Data::add('displaymode', $display3);
+                Data::getAll('displaymode');
+            }
+
+            if (!count($options)) {
+                $themeName = SITE_NAME != 'default' && !is_dir(THEME_PATH . DS . SITE_NAME) ? SITE_NAME : 'theme_' . time();
+                $option1 = array(
+                    'name'  => 'default_language',
+                    'value' => 'fr',
+                );
+                $option2 = array(
+                    'name'  => 'page_languages',
+                    'value' => 'fr',
+                );
+                $option3 = array(
+                    'name'  => 'theme',
+                    'value' => $themeName,
+                );
+                Data::add('option', $option1);
+                Data::add('option', $option2);
+                Data::add('option', $option3);
+                Data::getAll('option');
+                File::cpdir(THEME_PATH . DS . 'default', THEME_PATH . DS . $themeName);
+            }
+
+            if (!count($pages)) {
+                $sql = new Querydata('displaymode');
+                $res = $sql->where('name = online')->get();
+                $display = $sql->first($res);
+                $home = array(
+                    'displaymode'   => $display->getId(),
+                    'name'          => 'Home',
+                    'url'           => 'home',
+                    'date_in'       => date('d-m-Y'),
+                    'title'         => array(
+                        'fr'        => 'Bienvenue'
+                    ),
+                    'html'          => array(
+                        'fr'        => '<center><h1>Bienvenue</h1></center><p>Ceci est une page d\'exemple.</p>'
+                    ),
+                    'date_out'      => null,
+                    'keywords'      => array(
+                        'fr'        => null
+                    ),
+                    'description'   => array(
+                        'fr'        => null
+                    ),
+                );
+                Data::add('page', $home);
+                Data::getAll('page');
+            }
         }
 
         private static function routes()
