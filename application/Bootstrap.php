@@ -99,6 +99,23 @@
 
         private static function test()
         {
+            // $app = array(
+            //     'name' => 'TV',
+            //     'brand' => 'Philips',
+            //     'price' => '499',
+            //     'country' => 'France',
+            // );
+            // $sql = new Querydata('truc');
+            // $all = $sql->where('name = TV')->get();
+            // $config = array(
+            //     'checkTuple'         => array('name', 'brand'),
+            //     'orderList'          => 'name',
+            //     'orderListDirection' => 'ASC'
+            // );
+            // container()->setConfigDataTruc($config);
+            // dieDump($sql->first($all));
+            // exit;
+            // dieDump(cms_object('produits', 'tv')->getPrice());
             // $etat = Data::last('etat');
             // $produit = Data::first('produit');
             // $produit->setEtat($etat);
