@@ -57,12 +57,19 @@
 
         private static function loadDatas()
         {
+            $dirData = STORAGE_PATH . DS . 'data';
+            if (!is_dir(STORAGE_PATH)) {
+                mkdir(STORAGE_PATH, 0777);
+            }
+            if (!is_dir($dirData)) {
+                mkdir($dirData, 0777);
+            }
             $datas = glob(APPLICATION_PATH . DS . 'models' . DS . 'Data' . DS . '*.php');
             if (count($datas)) {
                 foreach ($datas as $model) {
                     $infos                      = include($model);
                     $tab                        = explode(DS, $model);
-                    $entity                     = repl('.php', '', Inflector::lower(end($tab)));
+                    $entity                     = repl('.php', '', Inflector::lower(Arrays::last($tab)));
                     $fields                     = $infos['fields'];
                     $settings                   = $infos['settings'];
                     Data::$_fields[$entity]     = $fields;
