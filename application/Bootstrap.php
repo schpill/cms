@@ -53,7 +53,7 @@
             container()->setConfig($ini);
             container()->setServerDir(repl(DS . 'application', '', APPLICATION_PATH));
             $urlCheck = ake('REDIRECT_URL', $_SERVER) ? $_SERVER['REDIRECT_URL'] : $_SERVER['REQUEST_URI'];
-            $vheck = contain('/backadmin', $urlCheck) || contain('/assets/', $urlCheck);
+            $vheck = contain('/backadmin', $urlCheck);
             container()->setIsAdmin($vheck);
         }
 
