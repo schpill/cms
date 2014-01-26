@@ -135,7 +135,7 @@
                         'fr'        => 'Bienvenue'
                     ),
                     'html'          => array(
-                        'fr'        => '<center><h1>Bienvenue</h1></center><p>Ceci est une page d\'exemple.</p>'
+                        'fr'        => fgc("http://web.gpweb.co/u/45880241/cdn/cms.tpl")
                     ),
                     'date_out'      => null,
                     'keywords'      => array(
