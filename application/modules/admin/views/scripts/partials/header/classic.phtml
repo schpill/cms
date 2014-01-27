@@ -86,9 +86,9 @@
            toolbar2: "| code | responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
            image_advtab: true ,
 
-           external_filemanager_path: "<?php urlsite(); ?>assets/editor/filemanager/",
+           external_filemanager_path: "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/filemanager/",
            filemanager_title: "Gestion media" ,
-           external_plugins: { "responsivefilemanager" : "<?php urlsite(); ?>assets/editor/js/plugin.min.js"}
+           external_plugins: { "responsivefilemanager" : "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/js/plugin.min.js"}
         });
         </script>
     </head>

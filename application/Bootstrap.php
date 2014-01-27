@@ -122,11 +122,8 @@
                 Data::add('option', $option3);
                 Data::getAll('option');
                 File::cpdir(THEME_PATH . DS . 'default', THEME_PATH . DS . $themeName);
-                // $webPath = repl('themes', 'web', THEME_PATH);
-                // chmod(THEME_PATH . DS . $themeName . DS . 'assets' . DS . 'js', 0777);
-                // File::cpdir($webPath . DS . 'assets' . DS . 'editor', THEME_PATH . DS . $themeName . DS . 'assets' . DS . 'js' . DS . 'editor');
-                // chmod(THEME_PATH . DS . $themeName . DS . 'assets' . DS . 'js' . DS . 'editor' . DS . 'source', 0777);
-                // chmod(THEME_PATH . DS . $themeName . DS . 'assets' . DS . 'js' . DS . 'editor' . DS . 'thumbs', 0777);
+                chmod(THEME_PATH . DS . $themeName . DS . 'assets' . DS . 'editor' . DS . 'source', 0777);
+                chmod(THEME_PATH . DS . $themeName . DS . 'assets' . DS . 'editor' . DS . 'thumbs', 0777);
             }
 
             if (!count($pages)) {

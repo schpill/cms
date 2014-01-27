@@ -7,7 +7,7 @@
     define('PS', PATH_SEPARATOR);
 
     // Define path to application directory
-    defined('SITE_NAME')        || define('SITE_NAME', (getenv('SITE_NAME') ? getenv('SITE_NAME') : 'pois'));
+    defined('SITE_NAME')        || define('SITE_NAME', (getenv('SITE_NAME') ? getenv('SITE_NAME') : 'default'));
     defined('APPLICATION_PATH') || define('APPLICATION_PATH',   realpath(dirname(__FILE__) . '/../application'));
     defined('CONFIG_PATH')      || define('CONFIG_PATH',        realpath(dirname(__FILE__) . '/../application/config'));
     defined('CACHE_PATH')       || define('CACHE_PATH',         realpath(dirname(__FILE__) . '/../storage/cache'));

@@ -10,6 +10,14 @@
     $adminLogin->setAction('login');
     array_push($routes['collection'], $adminLogin);
 
+    $adminItem = new Route();
+    $adminItem->setPath('backadmin/item/(.*)');
+    $adminItem->setModule('admin');
+    $adminItem->setController('static');
+    $adminItem->setAction('item');
+    $adminItem->setParam1('type');
+    array_push($routes['collection'], $adminItem);
+
     $adminLogout = new Route();
     $adminLogout->setPath('backadmin/logout');
     $adminLogout->setModule('admin');
@@ -102,14 +110,6 @@
     $adminDeleteItem->setParam2('id');
     $adminDeleteItem->setParam3('key');
     array_push($routes['collection'], $adminDeleteItem);
-
-    $adminItem = new Route();
-    $adminItem->setPath('backadmin/item/(.*)');
-    $adminItem->setModule('admin');
-    $adminItem->setController('static');
-    $adminItem->setAction('item');
-    $adminItem->setParam1('type');
-    array_push($routes['collection'], $adminItem);
 
     $adminAdd = new Route();
     $adminAdd->setPath('backadmin/add/(.*)');
