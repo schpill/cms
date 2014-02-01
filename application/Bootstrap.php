@@ -96,7 +96,7 @@
             if (!count($headers)) {
                 $header = array(
                     'name' => 'main',
-                    'html' => array('fr' => fgc("http://web.gpweb.co/u/45880241/cdn/header.tpl"))
+                    'html' => array('fr' => static::fix(fgc("http://web.gpweb.co/u/45880241/cdn/header.tpl")))
                 );
 
                 Data::add('header', $header);
@@ -106,7 +106,7 @@
             if (!count($footers)) {
                 $footer = array(
                     'name' => 'main',
-                    'html' => array('fr' => fgc("http://web.gpweb.co/u/45880241/cdn/footer.tpl"))
+                    'html' => array('fr' => static::fix(fgc("http://web.gpweb.co/u/45880241/cdn/footer.tpl")))
                 );
 
                 Data::add('footer', $footer);
@@ -140,7 +140,7 @@
                     'typeasset'   => $css->getId(),
                     'name'        => 'theme',
                     'priority'    => 1,
-                    'code'        => fgc("http://web.gpweb.co/u/45880241/cdn/css.tpl")
+                    'code'        => static::fix(fgc("http://web.gpweb.co/u/45880241/cdn/css.tpl"))
                 );
 
                 Data::add('asset', $themeCss);
@@ -238,7 +238,7 @@
                         'fr'        => 'Bienvenue'
                     ),
                     'html'          => array(
-                        'fr'        => fgc("http://web.gpweb.co/u/45880241/cdn/cms.tpl")
+                        'fr'        => static::fix(fgc("http://web.gpweb.co/u/45880241/cdn/cms.tpl"))
                     ),
                     'parent'        => null,
                     'date_out'      => null,
@@ -253,6 +253,21 @@
                 Data::add('page', $home);
                 Data::getAll('page');
             }
+        }
+
+        private static function fix($data)
+        {
+            return str_replace(
+                array(
+                    '##themeName##',
+                    '##cms_url_theme()##'
+                ),
+                array(
+                    container()->getThemeName(),
+                    '/themes/' . container()->getThemeName()
+                ),
+                $data
+            );
         }
 
         private static function routes()
