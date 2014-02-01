@@ -48,9 +48,9 @@ $source = realpath(dirname(__FILE__) . '/../../source');
 list($seg, $dummy) = explode('/assets/editor', $source, 2);
 list($dummy, $theme) = explode('/themes/', $seg, 2);
 $upload_dir = '/themes/' . $theme . '/assets/'; // path from base_url to base of upload folder (with start and final /)
-$current_path = '../../'; // relative path from filemanager folder to upload folder (with final /)
+$current_path = '../../assets/'; // relative path from filemanager folder to upload folder (with final /)
 //thumbs folder can't put inside upload folder
-$thumbs_base_path = '../../thumbs/'; // relative path from filemanager folder to thumbs folder (with final /)
+$thumbs_base_path = '../../assets/thumbs/'; // relative path from filemanager folder to thumbs folder (with final /)
 
 //--------------------------------------------------------------------------------------------------------
 // YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
@@ -112,7 +112,7 @@ $duplicate_files    = true;
 //Allowed extensions (lowercase insert)
 //**********************
 $ext_img    = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg'); //Images
-$ext_file   = array('doc', 'docx','rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv','html','xhtml','psd','sql','log','fla','xml','ade','adp','mdb','accdb','ppt','pptx','odt','ots','ott','odb','odg','otp','otg','odf','ods','odp','css','ai'); //Files
+$ext_file   = array('doc', 'docx','rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv','html','xhtml','psd','sql','log','fla','xml','ade','adp','mdb','accdb','ppt','pptx','odt','ots','ott','odb','odg','otp','otg','odf','ods','odp','css', 'ai', 'js'); //Files
 $ext_video  = array('mov', 'mpeg', 'mp4', 'avi', 'mpg','wma',"flv","webm"); //Video
 $ext_music  = array('mp3', 'm4a', 'ac3', 'aiff', 'mid','ogg','wav'); //Audio
 $ext_misc   = array('zip', 'rar','gz','tar','iso','dmg'); //Archives

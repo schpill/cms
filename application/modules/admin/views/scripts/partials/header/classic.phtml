@@ -101,9 +101,9 @@
                 <?php $i++; endforeach; ?>
             ],
 
-            external_filemanager_path: "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/filemanager/",
+            external_filemanager_path: "<?php urlsite(); ?>themes/<?php echo Thin\Cms::getOption('theme'); ?>/editor/filemanager/",
             filemanager_title: "Gestion media" ,
-            external_plugins: { "responsivefilemanager" : "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/js/plugin.min.js"}
+            external_plugins: { "responsivefilemanager" : "<?php urlsite(); ?>themes/<?php echo Thin\Cms::getOption('theme'); ?>/editor/js/plugin.min.js"}
         });
         </script>
     </head>
@@ -131,7 +131,7 @@
                         <?php if (container()->getAction() != 'dashboard' && container()->getAction() != 'no-right'): ?>
                         <li><a href="#" onclick="thinMenu(); return false;"><i class="icon-tasks"></i> Tables</a></li>
                         <?php endif; ?>
-                        <li><a href="<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/filemanager/dialog.php?type=0&amp;lang=fr_FR" class="managerLink"><i class="fa fa-cloud-upload fa-white"></i> Media Manager</a></li>
+                        <li><a href="<?php urlsite(); ?>themes/<?php echo Thin\Cms::getOption('theme'); ?>/editor/filemanager/dialog.php?type=0&amp;lang=fr_FR" class="managerLink"><i class="fa fa-cloud-upload fa-white"></i> Media Manager</a></li>
                         <li><a target="_site" href="<?php urlsite(); ?>"><i class="icon-external-link"></i> Afficher le site</a></li>
                         <li><a href="<?php urlsite(); ?>backadmin/logout"><i class="icon-off"></i> Déconnexion</a></li>
                         <?php endif; ?>
