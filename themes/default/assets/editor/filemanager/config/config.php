@@ -47,10 +47,10 @@ $base_url = $urlSite;  // DON'T TOUCH (base url (only domain) of site (without f
 $source = realpath(dirname(__FILE__) . '/../../source');
 list($seg, $dummy) = explode('/assets/editor', $source, 2);
 list($dummy, $theme) = explode('/themes/', $seg, 2);
-$upload_dir = '/themes/' . $theme . '/assets/editor/source/'; // path from base_url to base of upload folder (with start and final /)
-$current_path = '../source/'; // relative path from filemanager folder to upload folder (with final /)
+$upload_dir = '/themes/' . $theme . '/assets/'; // path from base_url to base of upload folder (with start and final /)
+$current_path = '../../assets/'; // relative path from filemanager folder to upload folder (with final /)
 //thumbs folder can't put inside upload folder
-$thumbs_base_path = '../thumbs/'; // relative path from filemanager folder to thumbs folder (with final /)
+$thumbs_base_path = '../../assets/thumbs/'; // relative path from filemanager folder to thumbs folder (with final /)
 
 //--------------------------------------------------------------------------------------------------------
 // YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS

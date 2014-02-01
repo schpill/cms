@@ -4,6 +4,10 @@
     {
         public function init()
         {
+            $ssl = Request::ssl();
+            if (!$ssl) {
+                Router::ssl();
+            }
             $this->view->titleAdmin = "CMS";
             $tab = explode('/', $_SERVER['REQUEST_URI']);
             $type = Arrays::last($tab);
@@ -47,6 +51,7 @@
 
             $lngs = Cms::getOption('page_languages');
             $this->view->cms_languages = !empty($lngs) ? explode(',', $lngs) : array();
+            $this->view->pages = Cms::getPages();
         }
 
         public function preDispatch()
@@ -460,6 +465,54 @@
                 }
             }
             Router::redirect(URLSITE . 'backadmin/item/' . $type);
+        }
+
+        public function cssAction()
+        {
+            $sql = new Querydata('typeasset');
+            $res = $sql->where('name = css')->get();
+            $css = $sql->first($res);
+
+            $sql = new Querydata('asset');
+            $res = $sql->where('typeasset = ' . $css->getId())->order('priority')->get();
+
+            $content = array();
+
+            if (count($res)) {
+                foreach ($res as $row) {
+                    $content[] = '// ' . $row->getName() . "\n" . $row->getCode();
+                }
+            }
+            header("content-type: text/css; charset: utf-8");
+            header("cache-control: must-revalidate");
+            $offset = 365 * 24 * 3600;
+            $expire = "expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+            header($expire);
+            die(implode("\n", $content));
+        }
+
+        public function jsAction()
+        {
+            $sql = new Querydata('typeasset');
+            $res = $sql->where('name = javascript')->get();
+            $js = $sql->first($res);
+
+            $sql = new Querydata('asset');
+            $res = $sql->where('typeasset = ' . $js->getId())->order('priority')->get();
+
+            $content = array();
+
+            if (count($res)) {
+                foreach ($res as $row) {
+                    $content[] = '// ' . $row->getName() . "\n" . $row->getCode();
+                }
+            }
+            header("content-type: text/javascript; charset: utf-8");
+            header("cache-control: must-revalidate");
+            $offset = 365 * 24 * 3600;
+            $expire = "expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+            header($expire);
+            die(implode("\n", $content));
         }
 
         public function postDispatch()

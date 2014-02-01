@@ -3,7 +3,7 @@ php_value post_max_size 56M
 Options +FollowSymLinks -MultiViews
 <IfModule mod_rewrite.c>
 	RewriteEngine on
-    RewriteRule ^themes/(.*) - [L]
+    RewriteRule ^themes/((?!cmsMedia).)*$ - [L]
 	RewriteRule  ^$ web/    [L]
 	RewriteRule  (.*) web/$1?from_htaccess=true [L]
 </IfModule>

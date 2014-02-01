@@ -24,6 +24,7 @@
         <link href="<?php urlsite(); ?>assets/css/admin.min.css" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?php urlsite(); ?>assets/css/responsive.css" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?php urlsite(); ?>assets/css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?php urlsite(); ?>assets/css/fontello.css" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?php urlsite(); ?>assets/css/icomoon.css" rel="stylesheet" />
         <link href="<?php urlsite(); ?>assets/css/glyphicons.css" rel="stylesheet" />
@@ -32,14 +33,13 @@
         <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
         <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet" />
         <link href="<?php urlsite(); ?>assets/css/admin.css" media="screen" rel="stylesheet" type="text/css" />
-        <link href="<?php urlsite(); ?>assets/css/jquery.fancybox.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.css" media="screen" rel="stylesheet" type="text/css" />
         <script src="<?php urlsite(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-        <script src="<?php urlsite(); ?>assets/js/jquery.fancybox.pack.js" type="text/javascript"></script>
-        <script src="<?php urlsite(); ?>assets/js/jquery.fancybox-media.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/1.3.4/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
         <script src="<?php urlsite(); ?>assets/js/respond.js"></script>
         <script src="<?php urlsite(); ?>assets/js/css3.js"></script>
@@ -47,15 +47,23 @@
         <script src="<?php urlsite(); ?>assets/js/ph.js" type="text/javascript"></script>
         <script src="<?php urlsite(); ?>assets/js/script.js" type="text/javascript"></script>
         <script src="<?php urlsite(); ?>assets/js/web.js?<?php echo filemtime(container()->getServerDir() . DS . 'web' . DS . 'assets' . DS . 'js' . DS . 'web.js'); ?>" type="text/javascript"></script>
-        <script src="//cdn.wysibb.com/js/jquery.wysibb.min.js"></script>
+        <script src="<?php urlsite(); ?>assets/js/bb/jquery.wysibb.min.js"></script>
         <script src="<?php urlsite(); ?>assets/js/bbfr.js"></script>
-        <link rel="stylesheet" href="//cdn.wysibb.com/css/default/wbbtheme.css" type="text/css" />
+        <link rel="stylesheet" href="<?php urlsite(); ?>assets/js/bb/themes/default/wbbtheme.css" type="text/css" />
         <script>
             CURLANG = WBBLANG['fr'] || WBBLANG['en'] || CURLANG;
             $(document).ready(function() {
                 $(".wysibb").wysibb();
+                $('.managerLink').fancybox({
+                    'width'     : 900,
+                    'height'    : 600,
+                    'type'      : 'iframe',
+                    'autoScale' : false
+                });
             });
             var _Thin = new Thin();
+
+
         </script>
         <style type="text/css" media="screen">
             .thinEditor {
@@ -81,14 +89,21 @@
                  "code advlist autolink link image lists charmap print preview hr anchor pagebreak",
                  "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
                  "table contextmenu directionality emoticons paste textcolor responsivefilemanager"
-           ],
-           toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
-           toolbar2: "| code | responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
-           image_advtab: true ,
+            ],
+            toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+            toolbar2: "| code | responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code ",
+            image_advtab: true ,
+            language_url : '<?php urlsite(); ?>assets/editor/langs/fr_FR.js',
 
-           external_filemanager_path: "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/filemanager/",
-           filemanager_title: "Gestion media" ,
-           external_plugins: { "responsivefilemanager" : "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/js/plugin.min.js"}
+            link_list: [
+                <?php $i = 0; foreach ($this->pages as $page): ?>
+                {title: '<?php echo addslashes($page->getName()); ?>', value: '/<?php echo $page->getUrl(); ?>'}<?php if($i +1 < count($this->pages)): ?>,<?php endif; ?>
+                <?php $i++; endforeach; ?>
+            ],
+
+            external_filemanager_path: "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/filemanager/",
+            filemanager_title: "Gestion media" ,
+            external_plugins: { "responsivefilemanager" : "<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/js/plugin.min.js"}
         });
         </script>
     </head>
@@ -103,9 +118,9 @@
                 <div class="nav-collapse collapse" id="navbar-main">
                     <ul class="nav navbar-nav">
                         <li>
-                            <h1 class="brand thinFont">
-                                <a href="<?php urlsite(); ?>backadmin/dashboard">
-                                    <i class="icon-cogs"></i> <?php echo $this->titleAdmin; ?> - Admin
+                            <h1>
+                                <a class="cmsLogo" href="<?php urlsite(); ?>backadmin/dashboard">
+                                    <?php echo $this->titleAdmin; ?> - Admin
                                 </a>
                             </h1>
                         </li>
@@ -116,6 +131,7 @@
                         <?php if (container()->getAction() != 'dashboard' && container()->getAction() != 'no-right'): ?>
                         <li><a href="#" onclick="thinMenu(); return false;"><i class="icon-tasks"></i> Tables</a></li>
                         <?php endif; ?>
+                        <li><a href="<?php urlsite(); ?>themes/<?php echo \Thin\Cms::getOption('theme'); ?>/assets/editor/filemanager/dialog.php?type=0&amp;lang=fr_FR" class="managerLink"><i class="fa fa-cloud-upload fa-white"></i> Media Manager</a></li>
                         <li><a target="_site" href="<?php urlsite(); ?>"><i class="icon-external-link"></i> Afficher le site</a></li>
                         <li><a href="<?php urlsite(); ?>backadmin/logout"><i class="icon-off"></i> Déconnexion</a></li>
                         <?php endif; ?>

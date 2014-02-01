@@ -53,6 +53,34 @@
                 'notRequired'       => true,
                 'noList'            => true
             ),
+            'header'                => array(
+                'type'              => 'data',
+                'entity'            => 'header',
+                'fields'            => array('name'),
+                'sort'              => 'name',
+                'sortOrder'         => 'ASC',
+                'label'             => 'Header',
+                'contentList'       => array('getValueEntity', 'header', 'name'),
+                'isTranslated'      => true,
+                'canBeNull'         => true,
+                'notRequired'       => true,
+                'notExportable'     => true,
+                'noList'            => true
+            ),
+            'footer'                => array(
+                'type'              => 'data',
+                'entity'            => 'footer',
+                'fields'            => array('name'),
+                'sort'              => 'name',
+                'sortOrder'         => 'ASC',
+                'label'             => 'Footer',
+                'contentList'       => array('getValueEntity', 'footer', 'name'),
+                'isTranslated'      => true,
+                'canBeNull'         => true,
+                'notRequired'       => true,
+                'notExportable'     => true,
+                'noList'            => true
+            ),
             'html'                  => array(
                 'label'             => 'Contenu',
                 'type'              => 'editor',
@@ -70,6 +98,12 @@
                 'displaymode'       => array(
                     'type'          => 'multiple'
                 ),
+                'header'            => array(
+                    'type'          => 'multiple'
+                ),
+                'footer'            => array(
+                    'type'          => 'multiple'
+                ),
             ),
             /* les relations */
             'relationships'         => array(
@@ -81,8 +115,12 @@
                     'type'          => 'manyToMany',
                     'onDelete'      => 'cascade'
                 ),
-                'translations'      => array(
-                    'type'          => 'manyToMany',
+                'header'            => array(
+                    'type'          => 'manyToOne',
+                    'onDelete'      => 'cascade'
+                ),
+                'footer'            => array(
+                    'type'          => 'manyToOne',
                     'onDelete'      => 'cascade'
                 ),
             ),

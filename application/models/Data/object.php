@@ -36,7 +36,6 @@
                     'onDelete'  => 'cascade'
                 ),
             ),
-            'versioning'         => true,
             'checkTuple'         => array('name', 'collection'),
             'orderList'          => 'name',
             'orderListDirection' => 'ASC'

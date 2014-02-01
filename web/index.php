@@ -24,8 +24,6 @@
     // Define application environment
     defined('APPLICATION_ENV')  || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-    define('STORAGE_PATH', STORAGE_DIR . DS . SITE_NAME);
-
     // Ensure library/ is on include_path
     set_include_path(implode(PS, array(
         LIBRARIES_PATH,
@@ -35,6 +33,11 @@
     $debug = APPLICATION_ENV != 'production' ? true : false;
 
     require_once 'Thin/Loader.php';
+
+    $themeName = SITE_NAME != 'default' && !is_dir(THEME_PATH . DS . SITE_NAME) ? SITE_NAME : 'theme_' . time();
+
+    define('STORAGE_PATH', STORAGE_DIR . DS . $themeName);
+    container()->setThemeName($themeName);
 
     require_once APPLICATION_PATH . DS . 'Bootstrap.php';
     Timer::start();

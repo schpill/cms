@@ -3,6 +3,23 @@
     $routes['collection'] = array();
     /* ADMIN */
 
+    $css = new Route();
+    $css->setPath('themes/(.*)/assets/css/cmsMedia-(.*).css');
+    $css->setModule('admin');
+    $css->setController('static');
+    $css->setAction('css');
+    $css->setParam1('theme');
+    $css->setParam2('theme2');
+    array_push($routes['collection'], $css);
+
+    $js = new Route();
+    $js->setPath('themes/(.*)/assets/js/cmsMedia-(.*).js');
+    $js->setModule('admin');
+    $js->setController('static');
+    $js->setAction('js');
+    $js->setParam1('theme');
+    array_push($routes['collection'], $js);
+
     $adminLogin = new Route();
     $adminLogin->setPath('backadmin/login');
     $adminLogin->setModule('admin');
