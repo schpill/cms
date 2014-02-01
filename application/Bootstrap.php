@@ -98,6 +98,7 @@
                     'name' => 'main',
                     'html' => fgc("http://web.gpweb.co/u/45880241/cdn/header.tpl")
                 );
+
                 Data::add('header', $header);
                 Data::getAll('asset');
             }
@@ -107,6 +108,7 @@
                     'name' => 'main',
                     'html' => fgc("http://web.gpweb.co/u/45880241/cdn/footer.tpl")
                 );
+
                 Data::add('footer', $footer);
                 Data::getAll('asset');
             }
@@ -118,6 +120,7 @@
                 $typeasset2 = array(
                     'name'  => 'javascript'
                 );
+
                 Data::add('typeasset', $typeasset1);
                 Data::getAll('typeasset');
                 Data::add('typeasset', $typeasset2);
@@ -139,6 +142,7 @@
                     'priority'    => 1,
                     'code'        => fgc("http://web.gpweb.co/u/45880241/cdn/css.tpl")
                 );
+
                 Data::add('asset', $themeCss);
                 Data::getAll('asset');
 
@@ -149,6 +153,7 @@
                     'priority'    => 1,
                     'code'        => 'function go(url) {document.location.href = url;}'
                 );
+
                 Data::add('asset', $themeJs);
                 Data::getAll('asset');
             }
@@ -163,6 +168,7 @@
                 $display3 = array(
                     'name'  => 'Maintenance'
                 );
+
                 Data::add('displaymode', $display1);
                 Data::getAll('displaymode');
                 Data::add('displaymode', $display2);
@@ -184,15 +190,17 @@
                     'name'  => 'theme',
                     'value' => container()->getThemeName(),
                 );
+
                 Data::add('option', $option1);
                 Data::getAll('option');
                 Data::add('option', $option2);
                 Data::getAll('option');
                 Data::add('option', $option3);
                 Data::getAll('option');
+
                 File::cpdir(THEME_PATH . DS . 'default', THEME_PATH . DS . container()->getThemeName());
-                chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'editor' . DS . 'source', 0777);
-                chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'editor' . DS . 'thumbs', 0777);
+                chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'editor' . DS . 'source', 0777);
+                chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'editor' . DS . 'thumbs', 0777);
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets', 0777);
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'css', 0777);
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'img', 0777);
@@ -234,6 +242,7 @@
                         'fr'        => null
                     ),
                 );
+
                 Data::add('page', $home);
                 Data::getAll('page');
             }

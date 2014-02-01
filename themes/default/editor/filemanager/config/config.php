@@ -45,7 +45,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 
 $base_url = $urlSite;  // DON'T TOUCH (base url (only domain) of site (without final /)).
 $source = realpath(dirname(__FILE__) . '/../../source');
-list($seg, $dummy) = explode('/assets/editor', $source, 2);
+list($seg, $dummy) = explode('/editor', $source, 2);
 list($dummy, $theme) = explode('/themes/', $seg, 2);
 $upload_dir = '/themes/' . $theme . '/assets/'; // path from base_url to base of upload folder (with start and final /)
 $current_path = '../../assets/'; // relative path from filemanager folder to upload folder (with final /)
@@ -63,7 +63,7 @@ $icon_theme         = "ico"; //ico or ico_dark you can cusatomize just putting a
 $show_folder_size   = true; //Show or not show folder size in list view feature in filemanager (is possible, if there is a large folder, to greatly increase the calculations)
 $show_sorting_bar   = true; //Show or not show sorting feature in filemanager
 $loading_bar        = true; //Show or not show loading bar
-$transliteration    = false;  //active or deactive the transliteration (mean convert all strange characters in A..Za..z0..9 characters)
+$transliteration    = true;  //active or deactive the transliteration (mean convert all strange characters in A..Za..z0..9 characters)
 
 //*******************************************
 //Images limit and resizing configuration
