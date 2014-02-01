@@ -34,7 +34,7 @@
 
     require_once 'Thin/Loader.php';
 
-    $themeName = SITE_NAME != 'default' && !is_dir(THEME_PATH . DS . SITE_NAME) ? SITE_NAME : 'theme_' . time();
+    $themeName = SITE_NAME != 'default' ? SITE_NAME : 'theme_' . time();
 
     define('STORAGE_PATH', STORAGE_DIR . DS . $themeName);
     container()->setThemeName($themeName);
