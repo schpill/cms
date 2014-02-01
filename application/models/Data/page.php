@@ -18,6 +18,16 @@
                 'label'             => 'URL',
                 'noList'            => true
             ),
+            'parent'                => array(
+                'type'              => 'data',
+                'entity'            => 'page',
+                'fields'            => array('name'),
+                'sort'              => 'name',
+                'label'             => 'Page parent',
+                'contentList'       => array('getValueEntity', 'page', 'name'),
+                'canBeNull'         => true,
+                'notRequired'       => true,
+            ),
             'title'                 => array(
                 'label'             => 'Titre',
                 'noList'            => true,

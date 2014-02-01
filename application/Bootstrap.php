@@ -96,7 +96,7 @@
             if (!count($headers)) {
                 $header = array(
                     'name' => 'main',
-                    'html' => fgc("http://web.gpweb.co/u/45880241/cdn/header.tpl")
+                    'html' => array('fr' => fgc("http://web.gpweb.co/u/45880241/cdn/header.tpl"))
                 );
 
                 Data::add('header', $header);
@@ -106,7 +106,7 @@
             if (!count($footers)) {
                 $footer = array(
                     'name' => 'main',
-                    'html' => fgc("http://web.gpweb.co/u/45880241/cdn/footer.tpl")
+                    'html' => array('fr' => fgc("http://web.gpweb.co/u/45880241/cdn/footer.tpl"))
                 );
 
                 Data::add('footer', $footer);
@@ -190,12 +190,18 @@
                     'name'  => 'theme',
                     'value' => container()->getThemeName(),
                 );
+                $option4 = array(
+                    'name'  => 'home_page_url',
+                    'value' => 'home',
+                );
 
                 Data::add('option', $option1);
                 Data::getAll('option');
                 Data::add('option', $option2);
                 Data::getAll('option');
                 Data::add('option', $option3);
+                Data::getAll('option');
+                Data::add('option', $option4);
                 Data::getAll('option');
 
                 File::cpdir(THEME_PATH . DS . 'default', THEME_PATH . DS . container()->getThemeName());
@@ -234,6 +240,7 @@
                     'html'          => array(
                         'fr'        => fgc("http://web.gpweb.co/u/45880241/cdn/cms.tpl")
                     ),
+                    'parent'        => null,
                     'date_out'      => null,
                     'keywords'      => array(
                         'fr'        => null

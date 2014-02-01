@@ -954,3 +954,11 @@ input,select,textarea {
     font-weight:300;
     font-size:18px;
 }
+
+label {
+    text-transform: uppercase;
+}
+.control-label, .controls {
+    font-size: 18px !important;
+    text-align: left !important;
+}

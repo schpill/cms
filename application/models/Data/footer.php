@@ -7,7 +7,7 @@
             ),
             'html'                  => array(
                 'label'             => 'Contenu',
-                'type'              => 'editor',
+                'type'              => 'textarea',
                 'isTranslated'      => true,
                 'canBeNull'         => true,
                 'notRequired'       => true,
