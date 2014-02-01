@@ -193,6 +193,7 @@
                 File::cpdir(THEME_PATH . DS . 'default', THEME_PATH . DS . container()->getThemeName());
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'editor' . DS . 'source', 0777);
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'editor' . DS . 'thumbs', 0777);
+                chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets', 0777);
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'css', 0777);
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'img', 0777);
                 chmod(THEME_PATH . DS . container()->getThemeName() . DS . 'assets' . DS . 'js', 0777);
