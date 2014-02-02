@@ -29,6 +29,7 @@
             static::loadConfigs();
             static::loadDatas();
             static::routes();
+            static::acl();
             static::dispatch();
             static::test();
             static::run();
@@ -69,29 +70,110 @@
                 mkdir($dirData, 0777);
             }
             $datas = glob(APPLICATION_PATH . DS . 'models' . DS . 'Data' . DS . '*.php');
+            $entities = array();
             if (count($datas)) {
                 foreach ($datas as $model) {
                     $infos                      = include($model);
                     $tab                        = explode(DS, $model);
                     $entity                     = repl('.php', '', Inflector::lower(Arrays::last($tab)));
+                    $entities[]                 = $entity;
                     $fields                     = $infos['fields'];
                     $settings                   = $infos['settings'];
                     Data::$_fields[$entity]     = $fields;
                     Data::$_settings[$entity]   = $settings;
                 }
             }
+            container()->setEntities($entities);
             static::fixtures();
         }
 
         private static function fixtures()
         {
-            $options    = Data::getAll('option');
-            $pages      = Data::getAll('page');
-            $displays   = Data::getAll('displaymode');
-            $typeAssets = Data::getAll('typeasset');
-            $assets     = Data::getAll('asset');
-            $headers    = Data::getAll('header');
-            $footers    = Data::getAll('footer');
+            $adminTables    = Data::getAll('admintable');
+            $adminUsers     = Data::getAll('adminuser');
+            $adminactions   = Data::getAll('adminaction');
+            $adminRights    = Data::getAll('adminright');
+            $options        = Data::getAll('option');
+            $pages          = Data::getAll('page');
+            $displays       = Data::getAll('displaymode');
+            $typeAssets     = Data::getAll('typeasset');
+            $assets         = Data::getAll('asset');
+            $headers        = Data::getAll('header');
+            $footers        = Data::getAll('footer');
+
+            if (!count($adminTables)) {
+                $entities = container()->getEntities();
+                if (count($entities)) {
+                    foreach ($entities as $entity) {
+                        $table = array(
+                            'name' => $entity
+                        );
+                        Data::add('admintable', $table);
+                        Data::getAll('admintable');
+                    }
+                }
+            }
+
+            if (!count($adminactions)) {
+                $actions = array(
+                    'list',
+                    'add',
+                    'duplicate',
+                    'view',
+                    'delete',
+                    'edit',
+                    'import',
+                    'export',
+                    'search',
+                    'empty_cache'
+                );
+
+                foreach ($actions as $action) {
+                    $newAction = array(
+                        'name' => $action
+                    );
+                    Data::add('adminaction', $newAction);
+                    Data::getAll('adminaction');
+                }
+            }
+
+            if (!count($adminUsers)) {
+                $user = array(
+                    'name'      => 'admin',
+                    'firstname' => 'admin',
+                    'login'     => 'admin',
+                    'password'  => 'admin',
+                    'email'     => 'admin@admin.com',
+                );
+
+                Data::add('adminuser', $user);
+                Data::getAll('adminuser');
+            }
+
+            if (!count($adminRights)) {
+                $sql        = new Querydata('adminuser');
+                $res        = $sql->where('email = admin@admin.com')->get();
+                $user       = $sql->first($res);
+
+                $tables     = Data::getAll('admintable');
+                $actions    = Data::getAll('adminaction');
+
+                if (count($tables)) {
+                    foreach ($tables as $table) {
+                        $table = Data::getIt('admintable', $table);
+                        foreach ($actions as $action) {
+                            $action = Data::getIt('adminaction', $action);
+                            $right = array(
+                                'adminuser'     => $user->getId(),
+                                'admintable'    => $table->getId(),
+                                'adminaction'   => $action->getId()
+                            );
+                            Data::add('adminright', $right);
+                            Data::getAll('adminright');
+                        }
+                    }
+                }
+            }
 
             if (!count($headers)) {
                 $header = array(
@@ -100,7 +182,7 @@
                 );
 
                 Data::add('header', $header);
-                Data::getAll('asset');
+                Data::getAll('header');
             }
 
             if (!count($footers)) {
@@ -110,7 +192,7 @@
                 );
 
                 Data::add('footer', $footer);
-                Data::getAll('asset');
+                Data::getAll('footer');
             }
 
             if (!count($typeAssets)) {
@@ -268,6 +350,30 @@
                 ),
                 $data
             );
+        }
+
+        private static function acl()
+        {
+            $session    = session('admin');
+            $dataRights = $session->getDataRights();
+            if (null !== $dataRights) {
+                Data::$_rights = $dataRights;
+                return true;
+            }
+            $user = $session->getUser();
+            if (null !== $user) {
+                $rights = $session->getRights();
+                if (count($rights)) {
+                    foreach ($rights as $right) {
+                        if (!ake($right->getAdmintable()->getName(), Data::$_rights)) {
+                            Data::$_rights[$right->getAdmintable()->getName()] = array();
+                        }
+                        Data::$_rights[$right->getAdmintable()->getName()][$right->getAdminaction()->getName()] = true;
+                    }
+                }
+                $session->setDataRights(Data::$_rights);
+            }
+            return false;
         }
 
         private static function routes()

@@ -186,9 +186,6 @@
                                                 <div class="sep"></div>
                                                 <textarea <?php echo $required; ?> class="thinWysiwyg" name="<?php echo $field; ?>" id="<?php echo $field; ?>"><?php echo \Thin\Html\Helper::display($this->item->$field); ?></textarea>
                                             </div>
-                                                        <script>
-                                                            tinyMCE.get('<?php echo $field; ?>').dom.loadCSS('<?php cms_url_theme(); ?>/assets/css/cmsMedia-<?php echo cms_option('theme'); ?>.css');
-                                                        </script>
                                         </div>
                                     <?php endif; ?>
                                     <?php if (ake('isTranslated', $content)): ?>
@@ -207,9 +204,6 @@
                                                         <div class="tab-pane<?php if (true === $first): ?> active<?php endif; ?>" id="<?php echo $field; ?>_<?php echo strtolower($lng); ?>">
                                                             <textarea <?php echo $required; ?> class="thinWysiwyg" name="<?php echo $field; ?>[<?php echo strtolower($lng); ?>]" id="<?php echo $field; ?>[<?php echo strtolower($lng); ?>]"><?php echo \Thin\Html\Helper::display(\Thin\Cms::lng($this->item->$field, $lng)); ?></textarea>
                                                         </div>
-                                                        <script>
-                                                            tinyMCE.activeEditor.dom.loadCSS('/themes/<?php echo cms_option('theme'); ?>/assets/css/cmsMedia-<?php echo cms_option('theme'); ?>.css');
-                                                        </script>
                                                     <?php $first = false; endforeach; ?>
                                                     </div>
                                                 </div>

@@ -16,16 +16,7 @@
                 if (!Arrays::inArray($action, array('login', 'logout', 'dashboard', 'no-right'))) {
                     $session = $this->checkSession();
                     $this->view->user   = $session->getUser();
-                    $acls               = $session->getUser()->getRights();
-                    $types = array();
-                    if (count($acls) && null !== $this->view->user) {
-                        foreach ($acls as $type => $rights) {
-                            Data::$_rights[$type] = $rights;
-                            array_push($types, $type);
-                        }
-                    }
-                    asort($types);
-                    $this->view->types  = $types;
+                    $this->view->types  = $this->getEntities($session);
                 }
             } else {
                 $action = $tab[count($tab) - 3];
@@ -52,6 +43,33 @@
             $lngs = Cms::getOption('page_languages');
             $this->view->cms_languages = !empty($lngs) ? explode(',', $lngs) : array();
             $this->view->pages = Cms::getPages();
+        }
+
+        private function getEntities($session)
+        {
+            $user       = $session->getUser();
+            $entities   = $session->getEntities();
+            if (null !== $entities) {
+                return $entities;
+            }
+            $types      = array();
+            if (null !== $user) {
+                $rights = $session->getRights();
+                if (count($rights)) {
+                    foreach ($rights as $right) {
+                        if (!ake($right->getAdmintable()->getName(), Data::$_rights)) {
+                            Data::$_rights[$right->getAdmintable()->getName()] = array();
+                        }
+                        Data::$_rights[$right->getAdmintable()->getName()][$right->getAdminaction()->getName()] = true;
+                        if (!Arrays::inArray($right->getAdmintable()->getName(), $types)) {
+                            array_push($types, $right->getAdmintable()->getName());
+                        }
+                    }
+                    asort($types);
+                }
+            }
+            $session->setEntities($types);
+            return $types;
         }
 
         public function preDispatch()
@@ -148,16 +166,7 @@
         {
             $session            = $this->checkSession();
             $this->view->user   = $session->getUser();
-            $acls               = $session->getUser()->getRights();
-            $types = array();
-            if (count($acls) && null !== $this->view->user) {
-                foreach ($acls as $type => $rights) {
-                    Data::$_rights[$type] = $rights;
-                    array_push($types, $type);
-                }
-            }
-            asort($types);
-            $this->view->types  = $types;
+            $this->view->types  = $this->getEntities($session);
             $this->view->title  = 'Tableau de bord';
             $this->view->remain = round(100 - ((31 - date('d')) * 2.06), 2);
         }

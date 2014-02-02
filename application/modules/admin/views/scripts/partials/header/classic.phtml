@@ -100,9 +100,12 @@
                 {title: '<?php echo addslashes($page->getName()); ?>', value: '/<?php echo $page->getUrl(); ?>'}<?php if($i +1 < count($this->pages)): ?>,<?php endif; ?>
                 <?php $i++; endforeach; ?>
             ],
+            content_css : "<?php cms_url_theme(); ?>/assets/css/cmsMedia-<?php echo cms_option('theme'); ?>.css",
 
             external_filemanager_path: "<?php urlsite(); ?>themes/<?php echo Thin\Cms::getOption('theme'); ?>/editor/filemanager/",
+
             filemanager_title: "Gestion media" ,
+
             external_plugins: { "responsivefilemanager" : "<?php urlsite(); ?>themes/<?php echo Thin\Cms::getOption('theme'); ?>/editor/js/plugin.min.js"}
         });
         </script>
@@ -132,7 +135,7 @@
                         <li><a href="#" onclick="thinMenu(); return false;"><i class="icon-tasks"></i> Tables</a></li>
                         <?php endif; ?>
                         <li><a href="<?php urlsite(); ?>themes/<?php echo Thin\Cms::getOption('theme'); ?>/editor/filemanager/dialog.php?type=0&amp;lang=fr_FR" class="managerLink"><i class="fa fa-cloud-upload fa-white"></i> Media Manager</a></li>
-                        <li><a target="_site" href="<?php urlsite(); ?>"><i class="icon-external-link"></i> Afficher le site</a></li>
+                        <li><a target="_site" href="<?php echo repl('https', 'http', URLSITE); ?>"><i class="icon-external-link"></i> Afficher le site</a></li>
                         <li><a href="<?php urlsite(); ?>backadmin/logout"><i class="icon-off"></i> Déconnexion</a></li>
                         <?php endif; ?>
                     </ul>
