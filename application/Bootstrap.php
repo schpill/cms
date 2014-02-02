@@ -83,8 +83,27 @@
                     Data::$_settings[$entity]   = $settings;
                 }
             }
+            $dirDataTheme = APPLICATION_PATH . DS . 'models' . DS . 'Data' . DS . container()->getThemeName();
+            if (is_dir($dirDataTheme)) {
+                $datasTheme = glob($dirDataTheme . DS . '*.php');
+                if (count($datasTheme)) {
+                    foreach ($datasTheme as $model) {
+                        $infos                      = include($model);
+                        $tab                        = explode(DS, $model);
+                        $entity                     = container()->getThemeName() . '_' .repl('.php', '', Inflector::lower(Arrays::last($tab)));
+                        $entities[]                 = $entity;
+                        $fields                     = $infos['fields'];
+                        $settings                   = $infos['settings'];
+                        Data::$_fields[$entity]     = $fields;
+                        Data::$_settings[$entity]   = $settings;
+                    }
+                }
+            }
             container()->setEntities($entities);
-            static::fixtures();
+            $pages = Data::getAll('page');
+            if(!count($pages)) {
+                static::fixtures();
+            }
         }
 
         private static function fixtures()

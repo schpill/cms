@@ -24,7 +24,7 @@
         /* les parametres */
         'settings'              => array(
             /* les indexes */
-            'indexes'     => array(
+            'indexes'           => array(
                 'collection'    => array(
                     'type'      => 'multiple'
                 ),
