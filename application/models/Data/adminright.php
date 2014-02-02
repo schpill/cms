@@ -23,7 +23,7 @@
                 'entity'            => 'adminaction',
                 'fields'            => array('name'),
                 'sort'              => 'name',
-                'label'             => 'Action',
+                'label'             => 'Droit',
                 'contentList'       => array('getValueEntity', 'adminaction', 'name'),
             ),
         ),
@@ -56,6 +56,8 @@
                     'onDelete'      => 'cascade'
                 ),
             ),
+            'singular'              => 'habilitation',
+            'plural'                => 'habilitations',
             'checkTuple'            => array('admintable', 'adminuser', 'adminaction'),
             'orderList'             => 'admintable',
             'orderListDirection'    => 'ASC'

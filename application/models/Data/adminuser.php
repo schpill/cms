@@ -40,6 +40,8 @@
             /* les relations */
             'relationships'         => array(
             ),
+            'singular'              => 'utilisateur',
+            'plural'                => 'utilisateurs',
             'checkTuple'            => 'email',
             'orderList'             => 'name',
             'orderListDirection'    => 'ASC'

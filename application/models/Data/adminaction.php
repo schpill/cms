@@ -14,6 +14,8 @@
             /* les relations */
             'relationships'         => array(
             ),
+            'singular'              => 'droit',
+            'plural'                => 'droits',
             'checkTuple'            => 'name',
             'orderList'             => 'name',
             'orderListDirection'    => 'ASC'
