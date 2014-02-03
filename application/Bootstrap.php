@@ -90,7 +90,7 @@
                     foreach ($datasTheme as $model) {
                         $infos                      = include($model);
                         $tab                        = explode(DS, $model);
-                        $entity                     = container()->getThemeName() . '_' .repl('.php', '', Inflector::lower(Arrays::last($tab)));
+                        $entity                     = container()->getThemeName() . '_' . repl('.php', '', Inflector::lower(Arrays::last($tab)));
                         $entities[]                 = $entity;
                         $fields                     = $infos['fields'];
                         $settings                   = $infos['settings'];
@@ -99,6 +99,17 @@
                     }
                 }
             }
+            $customtypes = Data::getAll('customtype');
+            if (count($customtypes)) {
+                foreach ($customtypes as $path) {
+                    $customtype                 = Data::getIt('customtype', $path);
+                    $entity                     = 'custom_' . Inflector::lower($customtype->getEntity());
+                    $entities[]                 = $entity;
+                    Data::$_fields[$entity]     = $customtype->getFields();
+                    Data::$_settings[$entity]   = $customtype->getSettings();
+                }
+            }
+
             container()->setEntities($entities);
             $pages = Data::getAll('page');
             if(!count($pages)) {
@@ -222,8 +233,8 @@
 
             if (!count($adminUsers)) {
                 $user = array(
-                    'name'      => 'admin',
-                    'firstname' => 'admin',
+                    'name'      => 'Admin',
+                    'firstname' => 'Dear',
                     'login'     => 'admin',
                     'password'  => 'admin',
                     'email'     => 'admin@admin.com',
