@@ -1,7 +1,18 @@
 <?php
     return array(
-        'fields' => array(
-            'name'    => array('label' => 'Nom')
+        'fields'                    => array(
+            'name'                  => array(
+                'label'             => 'Nom'
+            ),
+            'priority'              => array(
+                'label'             => 'Priorité',
+                'checkValue'        => function ($val) {
+                    if (is_int($val)) {
+                        return $val;
+                    }
+                    return '1';
+                },
+            ),
         ),
         'settings' => array(
             'relationships' => array(
@@ -9,7 +20,7 @@
             ),
             'singular'              => 'Statut de tâche',
             'plural'                => 'Statuts de tâche',
-            'orderList'             => 'name',
+            'orderList'             => 'priority',
             'checkTuple'            => 'name',
             'orderListDirection'    => 'ASC',
         ),

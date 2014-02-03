@@ -165,18 +165,19 @@
 
             if (!count($adminTaskStatus)) {
                 $allStatus = array(
-                    'Attribuée',
-                    'Terminée',
-                    'En cours',
-                    'En suspens',
-                    'En attente d\'information',
-                    'En test',
-                    'Réattribuée',
-                    'Annulée',
+                    1 => 'Attribuée',
+                    4 => 'Terminée',
+                    2 => 'En cours',
+                    7 => 'En suspens',
+                    6 => 'En attente d\'information',
+                    3 => 'En test',
+                    5 => 'Réattribuée',
+                    8 => 'Annulée',
                 );
-                foreach ($allStatus as $status) {
+                foreach ($allStatus as $priority => $status) {
                     $taskStatus = array(
-                        'name' => $status
+                        'name' => $status,
+                        'priority' => $priority
                     );
                     Data::add('admintaskstatus', $taskStatus);
                     Data::getAll('admintaskstatus');

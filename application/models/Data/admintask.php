@@ -31,7 +31,7 @@
                 'type'          => 'data',
                 'entity'        => 'admintaskstatus',
                 'fields'        => array('name'),
-                'sort'          => 'name',
+                'sort'          => 'priority',
                 'contentList'   => array('getValueEntity', 'admintaskstatus', 'name'),
             ),
             'parent'            => array(
