@@ -39,6 +39,8 @@
                     'onDelete'  => 'cascade'
                 ),
             ),
+            'singular'           => 'Tag de page',
+            'plural'             => 'Tags de page',
             'checkTuple'         => array('tag', 'page'),
             'orderList'          => 'page',
             'orderListDirection' => 'ASC'

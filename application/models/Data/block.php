@@ -23,7 +23,8 @@
             /* les relations */
             'relationships'     => array(
             ),
-            'versioning'         => true,
+            'singular'           => 'Bloc',
+            'plural'             => 'Blocs',
             'checkTuple'         => 'name',
             'orderList'          => 'name',
             'orderListDirection' => 'ASC'

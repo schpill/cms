@@ -962,3 +962,7 @@ label {
     font-size: 18px !important;
     text-align: left !important;
 }
+
+.page {
+    margin-top: 120px;
+}

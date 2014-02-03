@@ -37,7 +37,7 @@
                 $this->view->request = request();
             }
             if (strlen($type)) {
-                $this->view->_settings  = ake($type, Data::$_settings) ? Data::$_settings[$type] : array();
+                $this->view->_settings  = Arrays::exists($type, Data::$_settings) ? Data::$_settings[$type] : Data::defaultConfig($type);
             }
 
             $lngs = Cms::getOption('page_languages');
@@ -80,9 +80,7 @@
         public function logoutAction()
         {
             $_SESSION = array();
-            $route = new Route;
-            $route->setAction('login');
-            $this->forward($route);
+            Router::redirect(URLSITE . 'backadmin/login');
         }
 
         public function importAction()
@@ -151,6 +149,14 @@
                 } else {
                     $this->_noRight();
                 }
+            } else {
+                $session = session('admin');
+                $user = $session->getUser();
+                if (null !== $user) {
+                    $route = new Route;
+                    $route->setAction('dashboard');
+                    $this->forward($route);
+                }
             }
             $this->view->title = 'Se connecter';
         }
@@ -168,7 +174,6 @@
             $this->view->user   = $session->getUser();
             $this->view->types  = $this->getEntities($session);
             $this->view->title  = 'Tableau de bord';
-            $this->view->remain = round(100 - ((31 - date('d')) * 2.06), 2);
         }
 
         public function itemAction()
@@ -404,64 +409,6 @@
             return $session;
         }
 
-        private function model($type)
-        {
-            $file = APPLICATION_PATH . DS . 'entities' . DS . 'admin' . DS . ucfirst(Inflector::lower($type)) . '.php';
-            if (File::exists($file)) {
-                $model = include($file);
-                return $model;
-            }
-            return array('fields' => array());
-        }
-
-        private function addForm($type)
-        {
-            $model      = $this->model($type);
-            $fields     = $model['fields'];
-            $form       = array();
-            foreach ($fields as $key => $fieldInfos) {
-                $hidden = false;
-                if (ake('hidden', $fieldInfos)) {
-                    $hidden = $fieldInfos['hidden'];
-                }
-                if (ake('defaultValue', $fieldInfos)) {
-                    $value = $fieldInfos['defaultValue'];
-                }
-                $continue = true;
-                if (ake('onForm', $fieldInfos)) {
-                    $continue = $fieldInfos['onForm'];
-                }
-                if (true === $continue) {
-                    $form[] = Data::makeFormElement($key, null, $fieldInfos, $type, $hidden);
-                }
-            }
-            return $form;
-        }
-
-        private function editForm($type, $object)
-        {
-            $model      = $this->model($type);
-            $fields     = $model['fields'];
-            $form       = array();
-            foreach ($fields as $key => $fieldInfos) {
-                $hidden = false;
-                if (ake('hidden', $fieldInfos)) {
-                    $hidden = $fieldInfos['hidden'];
-                }
-                if (ake('defaultValue', $fieldInfos)) {
-                    $value = $fieldInfos['defaultValue'];
-                }
-                $continue = true;
-                if (ake('onForm', $fieldInfos)) {
-                    $continue = $fieldInfos['onForm'];
-                }
-                if (true === $continue) {
-                    $form[] = Data::makeFormElement($key, $object->$key, $fieldInfos, $type, $hidden);
-                }
-            }
-            return $form;
-        }
-
         public function emptyCacheAction()
         {
             $type = request()->getType();
@@ -494,8 +441,7 @@
             }
             header("content-type: text/css; charset: utf-8");
             header("cache-control: must-revalidate");
-            $offset = 365 * 24 * 3600;
-            $expire = "expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+            $expire = "expires: " . gmdate("D, d M Y H:i:s", strtotime("+1 year")) . " GMT";
             header($expire);
             die(implode("\n", $content));
         }
@@ -518,8 +464,7 @@
             }
             header("content-type: text/javascript; charset: utf-8");
             header("cache-control: must-revalidate");
-            $offset = 365 * 24 * 3600;
-            $expire = "expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+            $expire = "expires: " . gmdate("D, d M Y H:i:s", strtotime("+1 year")) . " GMT";
             header($expire);
             die(implode("\n", $content));
         }

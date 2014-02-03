@@ -5,10 +5,10 @@
         ),
         'settings' => array(
             'relationships' => array(
-                'assets'    => array('type' => 'manyToMany', 'onDelete' => 'cascade'),
+                'admintasks'    => array('type' => 'manyToMany', 'onDelete' => 'cascade'),
             ),
-            'singular'              => 'Type d\'asset',
-            'plural'                => 'Types d\'asset',
+            'singular'              => 'Type de tâche',
+            'plural'                => 'Types de tâche',
             'orderList'             => 'name',
             'checkTuple'            => 'name',
             'orderListDirection'    => 'ASC',

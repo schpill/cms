@@ -4,6 +4,8 @@
             'name'              => array('label' => 'Nom'),
         ),
         'settings' => array(
+            'singular'              => 'Type de média',
+            'plural'                => 'Types de média',
             'orderList'             => 'name',
             'checkTuple'            => 'name',
             'orderListDirection'    => 'ASC',

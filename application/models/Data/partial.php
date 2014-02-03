@@ -5,9 +5,10 @@
             'name'              => array(
                 'label'         => 'Nom',
             ),
-            'value'              => array(
+            'value'             => array(
                 'label'         => 'Contenu',
                 'type'          => 'editor',
+                'isTranslated'  => true,
                 'canBeNull'     => true,
                 'notRequired'   => true,
                 'notExportable' => true,
@@ -22,7 +23,8 @@
             /* les relations */
             'relationships'     => array(
             ),
-            'versioning'         => true,
+            'singular'           => 'Partiel',
+            'plural'             => 'Partiels',
             'checkTuple'         => 'name',
             'orderList'          => 'name',
             'orderListDirection' => 'ASC'

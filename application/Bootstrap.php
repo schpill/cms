@@ -108,17 +108,78 @@
 
         private static function fixtures()
         {
-            $adminTables    = Data::getAll('admintable');
-            $adminUsers     = Data::getAll('adminuser');
-            $adminactions   = Data::getAll('adminaction');
-            $adminRights    = Data::getAll('adminright');
-            $options        = Data::getAll('option');
-            $pages          = Data::getAll('page');
-            $displays       = Data::getAll('displaymode');
-            $typeAssets     = Data::getAll('typeasset');
-            $assets         = Data::getAll('asset');
-            $headers        = Data::getAll('header');
-            $footers        = Data::getAll('footer');
+            $adminTables        = Data::getAll('admintable');
+            $adminUsers         = Data::getAll('adminuser');
+            $adminactions       = Data::getAll('adminaction');
+            $adminRights        = Data::getAll('adminright');
+            $adminTaskStatus    = Data::getAll('admintaskstatus');
+            $adminTaskType      = Data::getAll('admintasktype');
+            $adminTaskTypes     = Data::getAll('admintasktype');
+            $adminCountries     = Data::getAll('admincountry');
+            $options            = Data::getAll('option');
+            $pages              = Data::getAll('page');
+            $displays           = Data::getAll('displaymode');
+            $typeAssets         = Data::getAll('typeasset');
+            $assets             = Data::getAll('asset');
+            $headers            = Data::getAll('header');
+            $footers            = Data::getAll('footer');
+
+            if (!count($adminCountries)) {
+                $list = fgc("http://web.gpweb.co/u/45880241/cdn/pays.csv");
+                $rows = explode("\n", $list);
+                foreach ($rows as $row) {
+                    $row = repl('"', '', trim($row));
+                    list($id, $name, $upp, $low, $code) = explode(';', $row, 5);
+
+                    $country = array(
+                        'name' => $name,
+                        'code' => $code
+                    );
+                    Data::add('admincountry', $country);
+                    Data::getAll('admincountry');
+                }
+            }
+
+            if (!count($adminTaskTypes)) {
+                $types = array(
+                    'Bogue',
+                    'Snippet',
+                    'SEO',
+                    'Traduction',
+                    'Graphisme',
+                    'Contenu',
+                    'Html',
+                    'Css',
+                    'Javascript',
+                );
+                foreach ($types as $type) {
+                    $taskType = array(
+                        'name' => $type
+                    );
+                    Data::add('admintasktype', $taskType);
+                    Data::getAll('admintasktype');
+                }
+            }
+
+            if (!count($adminTaskStatus)) {
+                $allStatus = array(
+                    'Attribuée',
+                    'Terminée',
+                    'En cours',
+                    'En suspens',
+                    'En attente d\'information',
+                    'En test',
+                    'Réattribuée',
+                    'Annulée',
+                );
+                foreach ($allStatus as $status) {
+                    $taskStatus = array(
+                        'name' => $status
+                    );
+                    Data::add('admintaskstatus', $taskStatus);
+                    Data::getAll('admintaskstatus');
+                }
+            }
 
             if (!count($adminTables)) {
                 $entities = container()->getEntities();

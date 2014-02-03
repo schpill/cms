@@ -12,6 +12,8 @@
                     'onDelete'      => 'cascade'
                 ),
             ),
+            'singular'              => 'Type de page',
+            'plural'                => 'Types de page',
             'orderList'             => 'name',
             'checkTuple'            => 'name',
             'orderListDirection'    => 'ASC',

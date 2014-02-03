@@ -17,6 +17,7 @@
                 'type'          => 'textarea',
                 'isTranslated'  => true,
                 'canBeNull'     => true,
+                'notRequired'   => true,
                 'notExportable' => true,
                 'noList'        => true
             ),
@@ -36,7 +37,11 @@
                     'onDelete'  => 'cascade'
                 ),
             ),
-            'checkTuple'         => array('name', 'collection'),
+            'singular'           => 'Objet',
+            'plural'             => 'Objets',
+            'checkTuple'         => array(
+                'name', 'collection'
+            ),
             'orderList'          => 'name',
             'orderListDirection' => 'ASC'
         ),
