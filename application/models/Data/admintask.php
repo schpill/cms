@@ -74,11 +74,9 @@
         /* les parametres */
         'settings'                  => array(
             /* les hooks */
-            'store'                 => array(
-                'afterStore'        => function ($type, $data) {
-                    /**/
-                }
-            ),
+            'afterStore'            => function ($type, $data) {
+                /**/
+            },
             /* les indexes */
             'indexes'               => array(
                 'adminuser'         => array(
