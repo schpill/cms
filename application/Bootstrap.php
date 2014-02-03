@@ -129,14 +129,16 @@
                 $rows = explode("\n", $list);
                 foreach ($rows as $row) {
                     $row = repl('"', '', trim($row));
-                    list($id, $name, $upp, $low, $code) = explode(';', $row, 5);
+                    if (contain(';', $row)) {
+                        list($id, $name, $upp, $low, $code) = explode(';', $row, 5);
 
-                    $country = array(
-                        'name' => $name,
-                        'code' => $code
-                    );
-                    Data::add('admincountry', $country);
-                    Data::getAll('admincountry');
+                        $country = array(
+                            'name' => $name,
+                            'code' => $code
+                        );
+                        Data::add('admincountry', $country);
+                        Data::getAll('admincountry');
+                    }
                 }
             }
 
