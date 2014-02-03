@@ -15,7 +15,7 @@
                 },
             ),
             'stock'                 => array(
-                'label'             => 'Numéro Bon de Commande',
+                'label'             => 'Stock',
                 'canBeNull'         => true,
                 'notRequired'       => true,
                 'noList'            => true,
