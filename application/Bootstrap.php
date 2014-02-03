@@ -105,8 +105,8 @@
                     $customtype                 = Data::getIt('customtype', $path);
                     $entity                     = 'custom_' . Inflector::lower($customtype->getEntity());
                     $entities[]                 = $entity;
-                    Data::$_fields[$entity]     = $customtype->getFields();
-                    Data::$_settings[$entity]   = $customtype->getSettings();
+                    Data::$_fields[$entity]     = eval('return ' . $customtype->getChamp() . ';');
+                    Data::$_settings[$entity]   = eval('return ' . $customtype->getParam() . ';');
                 }
             }
 

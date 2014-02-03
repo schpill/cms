@@ -191,7 +191,7 @@
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle openHover" data-toggle="dropdown" href="#">
-                                <i class="fa fa-edit"></i> &Eacute;léments <b class="caret"></b>
+                                <i class="fa fa-edit"></i> Contenus <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
                                 <?php $type = 'header'; ?>
@@ -222,6 +222,27 @@
                                 <?php $type = 'tagpage'; ?>
                                 <?php if(can($type, 'list')): ?>
                                 <li><a href="<?php urlsite(); ?>backadmin/item/<?php echo \Thin\Html\Helper::display($type); ?>"><i class="fa fa-cog"></i> Tags par page</a></li>
+                                <?php endif; ?>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle openHover" data-toggle="dropdown" href="#">
+                                <i class="fa fa-cogs"></i> Données <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php $type = 'customtype'; ?>
+                                <?php if(can($type, 'list')): ?>
+                                <li><a href="<?php urlsite(); ?>backadmin/item/<?php echo \Thin\Html\Helper::display($type); ?>"><i class="fa fa-list"></i> Les tables</a></li>
+                                <?php endif; ?>
+                                <?php $cts = \Thin\Data::getAll('customtype'); ?>
+                                <?php if(count($cts)): ?>
+                                    <li class="divider"></li>
+                                    <?php foreach($cts as $ct):
+                                    $table = \Thin\Data::getIt('customtype', $ct);
+                                    $tableDisplay = ucfirst(repl('custom_', '', strtolower($table->getEntity())));
+                                    ?>
+                                        <li><a href="<?php urlsite(); ?>backadmin/item/custom_<?php echo \Thin\Html\Helper::display($table->getEntity()); ?>"><i class="fa fa-list"></i> <?php echo $tableDisplay; ?></a></li>
+                                    <?php endforeach; ?>
                                 <?php endif; ?>
                             </ul>
                         </li>
